@@ -3,7 +3,7 @@
 	"id": "minekimi",
 	"version": "${version}",
 	"name": "Mine Kimi Client",
-	"description": "(This is CLIENT ONLY VERSION!)Chat with Kimi!",
+	"description": "(This is a CLIENT ONLY VERSION!) Chat with Kimi!",
 	"authors": [
 		"P1nero"
 	],
