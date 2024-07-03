@@ -18,18 +18,19 @@ public class Config {
     public static int SIZE = 5;
     public static String SYSTEM = "你是一个超级无敌可爱的女孩子，请你注意说话的语气要可爱。当有多个问题时没有特殊说明请你以最后一个问题为准（注意分辨多轮对话！）。";
     public static String NAME = "Kimi酱";
+    public static boolean BROADCAST = true;
     public static final String JSON = "MineKimi.json";
     static Locale defaultLocale = Locale.getDefault();
     static String language = defaultLocale.getLanguage();
 
 
     public static void onInitialize() {
-        KimiClient.LOGGER.info("Your system language is: " + language);
+        Kimi.LOGGER.info("Your system language is: " + language);
         loadConfig();
     }
 
     public static void loadConfig() {
-        File configFolder = new File("config" + File.separator + KimiClient.MOD_ID);
+        File configFolder = new File("config" + File.separator + Kimi.MOD_ID);
         if (!configFolder.exists()) {
             configFolder.mkdirs();
         }
@@ -37,7 +38,7 @@ public class Config {
         File configFile = new File(configFolder, JSON);
         if (configFile.exists()) {
             try (FileReader reader = new FileReader(configFile)) {
-                KimiClient.LOGGER.info("Loading configuration file...");
+                Kimi.LOGGER.info("Loading configuration file...");
                 JsonObject config = new Gson().fromJson(reader, JsonObject.class);
                 API_LINK = config.get("API_Link").getAsString();
                 API_KEY = config.get("API_KEY").getAsString();
@@ -46,12 +47,13 @@ public class Config {
                 SIZE = config.get("SIZE").getAsInt();
                 SYSTEM = config.get("SYSTEM").getAsString();
                 NAME = config.get("NAME").getAsString();
+                BROADCAST = config.get("BROADCAST").getAsBoolean();
             } catch (IOException e) {
-                KimiClient.LOGGER.error("Failed to load configuration file!" + e);
+                Kimi.LOGGER.error("Failed to load configuration file!" + e);
             }
         } else {
             try {
-                KimiClient.LOGGER.info("Generating configuration file...");
+                Kimi.LOGGER.info("Generating configuration file...");
                 configFile.createNewFile();
                 JsonObject config = new JsonObject();
                 config.addProperty("API_Link", API_LINK);
@@ -61,11 +63,12 @@ public class Config {
                 config.addProperty("SIZE", SIZE);
                 config.addProperty("SYSTEM", SYSTEM);
                 config.addProperty("NAME", NAME);
+                config.addProperty("BROADCAST", BROADCAST);
                 try (FileWriter writer = new FileWriter(configFile)) {
                     writer.write(new GsonBuilder().setPrettyPrinting().create().toJson(config));
                 }
             } catch (IOException e) {
-                KimiClient.LOGGER.info("Error generating configuration file!" + e);
+                Kimi.LOGGER.info("Error generating configuration file!" + e);
             }
         }
     }
