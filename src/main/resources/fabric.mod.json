@@ -2,8 +2,8 @@
 	"schemaVersion": 1,
 	"id": "minekimi",
 	"version": "${version}",
-	"name": "Mine Kimi",
-	"description": "Chat with Kimi!",
+	"name": "Mine Kimi Client",
+	"description": "(This is CLIENT ONLY VERSION!)Chat with Kimi!",
 	"authors": [
 		"P1nero"
 	],
@@ -14,9 +14,6 @@
 	"license": "CC0-1.0",
 	"environment": "*",
 	"entrypoints": {
-		"main": [
-			"net.p1nero.kimi.Kimi"
-		],
 		"client": [
 			"net.p1nero.kimi.KimiClient"
 		]
